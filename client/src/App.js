@@ -1,12 +1,7 @@
-import { useState } from 'react';
 import { Switch, Route } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 
-import {
-  ApolloClient,
-  InMemoryCache,
-  gql,
-  ApolloProvider,
-} from '@apollo/client';
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 
 //component/ page imports
 import Nav from './components/Nav';
@@ -23,6 +18,7 @@ const App = () => {
   return (
     <ApolloProvider client={client}>
       <Nav />
+      <ToastContainer />
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/register" component={Register} />
