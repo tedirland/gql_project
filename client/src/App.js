@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Nav from './components/Nav';
 
 import {
   ApolloClient,
@@ -17,6 +18,7 @@ const client = new ApolloClient({
 const App = () => {
   return (
     <ApolloProvider client={client}>
+      <Nav />
       <Home />
     </ApolloProvider>
   );
