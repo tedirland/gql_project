@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Nav from './components/Nav';
+import { Switch, Route } from 'react-router-dom';
 
 import {
   ApolloClient,
@@ -8,7 +8,11 @@ import {
   ApolloProvider,
 } from '@apollo/client';
 
+//component/ page imports
+import Nav from './components/Nav';
 import Home from './pages/Home';
+import Login from './pages/auth/Login';
+import Register from './pages/auth/Register';
 
 const client = new ApolloClient({
   uri: 'http://localhost:8000/graphql',
@@ -19,7 +23,11 @@ const App = () => {
   return (
     <ApolloProvider client={client}>
       <Nav />
-      <Home />
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/register" component={Register} />
+        <Route exact path="/login" component={Login} />
+      </Switch>
     </ApolloProvider>
   );
 };
