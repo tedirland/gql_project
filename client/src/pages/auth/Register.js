@@ -21,7 +21,7 @@ const Register = () => {
       `Email is sent to ${email}. Click link to complete your registration!`
     );
     //save user email to local storage
-    window.localStorage.setItem('emailFormRegistration', email);
+    window.localStorage.setItem('emailForRegistration', email);
 
     //clear email from the state
 
