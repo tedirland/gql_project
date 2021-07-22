@@ -59,16 +59,6 @@ const Home = () => {
           Fetch Posts
         </button>
       </div>
-      <hr />
-      {JSON.stringify(posts)}
-      <hr />
-      {JSON.stringify(state.user)}
-      <hr />
-      <button className="btn btn-primary" onClick={updateName}>
-        Change User Name
-      </button>
-      <hr />
-      {JSON.stringify(history)}
     </div>
   );
 };
