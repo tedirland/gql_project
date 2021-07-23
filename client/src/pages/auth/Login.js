@@ -9,7 +9,6 @@ const Login = () => {
   const [email, setEmail] = useState('irlandth@gmail.com');
   const [password, setPassword] = useState('123456');
   const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
 
   let history = useHistory();
 
@@ -40,9 +39,25 @@ const Login = () => {
     }
   };
 
+  const googleLogin = () => {
+    auth.signInWithPopup(googleAuthProvider).then(async result => {
+      const { user } = result;
+      const idTokenResult = await user.getIdTokenResult();
+
+      dispatch({
+        type: 'LOGGED_IN_USER',
+        payload: { email: user.email, token: idTokenResult.token },
+      });
+      history.push('/');
+    });
+  };
+
   return (
     <div className="container p-5">
-      <h4>Login</h4>
+      {loading ? <h4 className="text-danger">Loading...</h4> : <h4>Login</h4>}
+      <button onClick={googleLogin} className="btn btn-raised btn-danger mt-5">
+        Login With Google
+      </button>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label>Email Address</label>
