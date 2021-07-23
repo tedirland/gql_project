@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { auth } from '../../firebase';
 import { toast } from 'react-toastify';
 import { useHistory } from 'react-router';
+import { AuthContext } from '../../context/authContext';
 
 const CompleteRegistration = () => {
+  const { dispatch } = useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState('');
@@ -34,7 +36,15 @@ const CompleteRegistration = () => {
 
         //dispatch user with token and email
 
-        //redirect to anothe page
+        //redirect to another page
+        const idTokenResult = await user.getIdTokenResult();
+        dispatch({
+          type: 'LOGGED_IN_USER',
+          payload: { email: user.email, token: idTokenResult.token },
+        });
+        //make api request to save/update user in MongoDB
+
+        history.push('/');
       }
       console.log(result);
       toast.success('User successfully registered!');
@@ -50,7 +60,7 @@ const CompleteRegistration = () => {
         {loading ? (
           <h4 className="text-danger">Loading...</h4>
         ) : (
-          <h4>Register</h4>
+          <h4>Complete Registration</h4>
         )}
 
         <form onSubmit={handleSubmit}>

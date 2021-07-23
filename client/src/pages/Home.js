@@ -58,6 +58,8 @@ const Home = () => {
         >
           Fetch Posts
         </button>
+        <hr />
+        {JSON.stringify(state.user)}
       </div>
     </div>
   );
