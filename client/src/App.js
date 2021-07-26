@@ -1,7 +1,12 @@
 import { Switch, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 
-import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  createHttpLink,
+} from '@apollo/client';
 
 //component/ page imports
 import Nav from './components/Nav';
@@ -11,21 +16,28 @@ import Register from './pages/auth/Register';
 import CompleteRegistration from './pages/auth/CompleteRegistration';
 import { useContext } from 'react';
 import { AuthContext } from './context/authContext';
+import { setContext } from '@apollo/client/link/context';
 
 const App = () => {
   const { state } = useContext(AuthContext);
   const { user } = state;
+  const httpLink = createHttpLink({
+    uri: process.env.REACT_APP_GRAPHQL_ENDPOINT,
+  });
+
+  const authLink = setContext((_, { headers }) => {
+    const token = user.token;
+    return {
+      headers: {
+        ...headers,
+        authtoken: user ? token : '',
+      },
+    };
+  });
 
   const client = new ApolloClient({
-    uri: 'http://localhost:8000/graphql',
+    link: authLink.concat(httpLink),
     cache: new InMemoryCache(),
-    request: operation => {
-      operation.setContext({
-        headers: {
-          authtoken: user ? user.token : '',
-        },
-      });
-    },
   });
   return (
     <ApolloProvider client={client}>
