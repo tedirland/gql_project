@@ -18,7 +18,7 @@ const USER_CREATE = gql`
 const Login = () => {
   const { dispatch } = useContext(AuthContext);
   const [email, setEmail] = useState('irlandth@gmail.com');
-  const [password, setPassword] = useState('123456');
+  const [password, setPassword] = useState('Test12345');
   const [loading, setLoading] = useState(false);
 
   let history = useHistory();
@@ -42,7 +42,7 @@ const Login = () => {
 
           //send user info to our server mongodb to either update/create
           userCreate();
-          history.push('/');
+          history.push('/profile');
         });
     } catch (error) {
       console.log('Login failed', error);
@@ -61,7 +61,7 @@ const Login = () => {
         payload: { email: user.email, token: idTokenResult.token },
       });
       userCreate();
-      history.push('/');
+      history.push('/profile');
     });
   };
 

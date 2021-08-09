@@ -21,7 +21,7 @@ const PrivateRoute = ({ children, ...rest }) => {
           </Link>
         </li>
         <li className="nav-item">
-          <Link className="nav-link" to="/password/update">
+          <Link className="nav-link" to="/password/reset">
             Password
           </Link>
         </li>

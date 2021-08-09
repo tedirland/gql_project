@@ -53,11 +53,18 @@ const Nav = () => {
             </>
           )}
           {user && (
-            <li className="nav-item">
-              <a onClick={logout} className="nav-link nav-item" href="/login">
-                Logout
-              </a>
-            </li>
+            <>
+              <li className="nav-item active">
+                <Link className="nav-link" to="/profile">
+                  Profile
+                </Link>
+              </li>
+              <li className="nav-item">
+                <a onClick={logout} className="nav-link nav-item" href="/login">
+                  Logout
+                </a>
+              </li>
+            </>
           )}
         </ul>
         <div className="ml-auto"></div>

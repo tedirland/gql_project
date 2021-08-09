@@ -57,7 +57,7 @@ const CompleteRegistration = () => {
         });
         //make api request to save/update user in MongoDB
         userCreate();
-        history.push('/');
+        history.push('/profile');
       }
       console.log(result);
       toast.success('User successfully registered!');

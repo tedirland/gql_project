@@ -19,6 +19,8 @@ import { AuthContext } from './context/authContext';
 import { setContext } from '@apollo/client/link/context';
 import PrivateRoute from './components/PrivateRoute';
 import PasswordReset from './pages/auth/PasswordReset';
+import Post from './pages/post/Post';
+import Profile from './pages/auth/Profile';
 
 const App = () => {
   const { state } = useContext(AuthContext);
@@ -54,7 +56,9 @@ const App = () => {
           component={CompleteRegistration}
         />
         <Route exact path="/login" component={Login} />
-        <PrivateRoute exact path="/password/forgot" component={PasswordReset} />
+        <PrivateRoute exact path="/password/reset" component={PasswordReset} />
+        <PrivateRoute exact path="/profile" component={Profile} />
+        <PrivateRoute exact path="/post/create" component={Post} />
       </Switch>
     </ApolloProvider>
   );
