@@ -18,9 +18,11 @@ import { useContext } from 'react';
 import { AuthContext } from './context/authContext';
 import { setContext } from '@apollo/client/link/context';
 import PrivateRoute from './components/PrivateRoute';
-import PasswordReset from './pages/auth/PasswordReset';
+import PasswordUpdate from './pages/auth/PasswordUpdate';
 import Post from './pages/post/Post';
 import Profile from './pages/auth/Profile';
+
+import PasswordReset from './pages/auth/PasswordForgot';
 
 const App = () => {
   const { state } = useContext(AuthContext);
@@ -49,6 +51,7 @@ const App = () => {
       <ToastContainer />
       <Switch>
         <Route exact path="/" component={Home} />
+        <Route exact path="/password/forgot" component={PasswordReset} />
         <Route exact path="/register" component={Register} />
         <Route
           exact
@@ -56,7 +59,7 @@ const App = () => {
           component={CompleteRegistration}
         />
         <Route exact path="/login" component={Login} />
-        <PrivateRoute exact path="/password/reset" component={PasswordReset} />
+        <PrivateRoute exact path="/password/reset" component={PasswordUpdate} />
         <PrivateRoute exact path="/profile" component={Profile} />
         <PrivateRoute exact path="/post/create" component={Post} />
       </Switch>
